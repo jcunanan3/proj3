@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h2>Crime Report Home Page</h2>
+{#    {% for i in data %}#}
+{#    <p>{{ i.date }}{{ i.category }}{{ i.total }}</p>#}
+{#    {% endfor %}#}
+    <script type="text/javascript">
+      var crime_info=[];
+
+
+      $.ajax({
+            url: '/crimeinfo/',
+            type: 'GET',
+          dataType: 'json',
+          success: function(response) {
+              console.log(response);
+              crime_info=response;
+
+          },
+          error: function(response) {
+              console.log(response)
+          }
+
+      });
+    </script>
+
+
+{% endblock %}
