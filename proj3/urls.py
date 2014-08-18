@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'proj3_app.views.home', name='home'),
     url(r'^crimeinfo/$', 'proj3_app.views.crimeinfo', name='crimeinfo'),
-
-
+    url(r'^test/$', 'proj3_app.views.test', name='test'),
+    url(r'^test2/$', 'proj3_app.views.test2', name='test2'),
+    url(r'^assault_count/$', 'proj3_app.views.assault_count', name='assault_count'),
+    url(r'^crime_date/$', 'proj3_app.views.crime_date', name='crime_date'),
 )
