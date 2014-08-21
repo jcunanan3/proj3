@@ -1,5 +1,8 @@
 $( document ).ready(function() {
+
+
     console.log("ready!");
+//    establish global variables to be passed between the ajax calls and the charting functions
     var crime_date=[];
     var assault_count=[];
     var assault_regression=[];
@@ -14,9 +17,10 @@ $( document ).ready(function() {
     var vehicletheft_count=[];
     var vehicletheft_regression=[];
 
-
+//    call all of the ajax requests first
     $.when(
-
+    $.when(
+//        use a single date vector for all charts
         $.ajax({
             url: '/crime_date/',
             type: 'GET',
@@ -182,11 +186,16 @@ $( document ).ready(function() {
                     console.log(response)
                 }
             })
-    ).done(
+//        all of the charting functions are called after the ajax data requests are fulfilled
+    ).then(
         function() {
 
 //              console.log('highchart function ',crime_date, assault_count);
                 $('#container').highcharts({
+                    chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                     plotOptions:{
                         line: {
                             marker: {
@@ -239,13 +248,17 @@ $( document ).ready(function() {
 
                         },
                         {
-                            name:'assault regression',
+                            name:'regression',
                             data: assault_regression
                         }
                     ]
-                })},
+                })}).then(
         function() {
                 $('#container2').highcharts({
+                    chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                     plotOptions:{
                         line: {
                             marker: {
@@ -298,15 +311,19 @@ $( document ).ready(function() {
                             data: burglary_count
                         },
                         {
-                            name:'burglary regression',
+                            name:'regression',
                             data: burglary_regression
                         }
                     ]
                 });
-            },
+            }).then(
 
         function() {
                 $('#container3').highcharts({
+                    chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                     plotOptions:{
                         line: {
                             marker: {
@@ -359,16 +376,20 @@ $( document ).ready(function() {
                             data: drugs_count
                         },
                         {
-                            name:'drugs regression',
+                            name:'regression',
                             data: drugs_regression
                         }
                     ]
                 });
-            },
+            }).then(
 
 
         function() {
                     $('#container4').highcharts({
+                        chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                         plotOptions:{
                             line: {
                                 marker: {
@@ -420,15 +441,19 @@ $( document ).ready(function() {
                                 data: robbery_count
                             },
                             {
-                                name:'robbery regression',
+                                name:'regression',
                                 data: robbery_regression
                             }
                         ]
                     });
-                },
+                }).then(
 
         function() {
                 $('#container5').highcharts({
+                    chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                     plotOptions:{
                         line: {
                             marker: {
@@ -481,15 +506,19 @@ $( document ).ready(function() {
                             data: vehicletheft_count
                         },
                         {
-                            name:'vehicle theft regression',
+                            name:'regression',
                             data: vehicletheft_regression
                         }
                     ]
                 });
-            },
+            }).then(
 
             function() {
                 $('#container6').highcharts({
+                    chart: {
+                        type: 'line',
+                        width: 1600
+                    },
                     plotOptions:{
                         line: {
                             marker: {
@@ -542,15 +571,17 @@ $( document ).ready(function() {
                             data: theft_count
                         },
                         {
-                            name:'theft regression',
+                            name:'regression',
                             data: theft_regression
                         }
                     ]
                 });
             }
-
-        );
-//$(function() {
-//    $( "#tabs" ).tabs();
-//  });
+//    call the tabs functions last (very important!)
+    )).done
+        (
+            function() {
+                $( "#tabs" ).tabs();
+              }
+    )
     });
