@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Report(models.Model):
+    # Some of these fields could be separate tables possibly or a list of choices?
+    # This would make it easier to do any kind of filtering or statistical analysis
+    # later on different categories for example.
     incident = models.CharField(max_length=100)
     category = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
