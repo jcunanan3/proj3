@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 
+//    The main opportunities to refactor are to store the category ids ('theft', 'robbery', etc.) as parameters in an array and then pass them to looped ajax calls in order to obtain the required data and then store that data in another array. I could then loop the highchart calls in another array. This would vastly reduce the amount of code in this file.
 
     console.log("ready!");
 //    establish global variables to be passed between the ajax calls and the charting functions
