@@ -19,6 +19,9 @@ $( document ).ready(function() {
     var vehicletheft_regression=[];
 
 //    call all of the ajax requests first
+
+    // Could one call just return all of the information, 
+    // especially if you're waiting for all of them to return anyways?
     $.when(
     $.when(
 //        use a single date vector for all charts
@@ -189,7 +192,11 @@ $( document ).ready(function() {
             })
 //        all of the charting functions are called after the ajax data requests are fulfilled
     ).then(
+        
         function() {
+                // All of these highcharts are using mostly the same exact parameters.
+                // You could make a function that makes the highchart with the default parameters
+                // plus the couple of dynamic params.
 
 //              console.log('highchart function ',crime_date, assault_count);
                 $('#container').highcharts({
