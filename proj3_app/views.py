@@ -10,10 +10,11 @@ from proj3_app.models import Report
 def home(request):
     return render(request, 'home.html')
 
-
+# These two views seem exactly the same minus one line?
 def crimeinfo(request):
     assault_date=[]
     assault_total=[]
+    # Long line, should indent down
     data = Report.objects.filter(category='ASSAULT').values('date', 'category').annotate(total=Count('incident')).order_by('-date','category')
 
     for i in data:
@@ -25,6 +26,7 @@ def crimeinfo(request):
 
 def crime_date(request):
     assault_date = []
+    # Long line, should indent down
     data = Report.objects.filter(category='ASSAULT').values('date', 'category').annotate(total=Count('incident')).order_by('date','category')
 
     for i in data:
@@ -36,6 +38,7 @@ def crime_date(request):
 # Extract and summarize data from report file.
 def category_count(request, cat):
     cat_array = []
+    # should be if / elif / elif
     if cat == 'theft':
         # The forward slash requires special management since it causes the URL append to fail.
         cat = 'LARCENY/THEFT'
@@ -54,9 +57,11 @@ def category_count(request, cat):
 
 # Compute regression using numpy
 def cat_regression(request, cat):
+    # imports should be at top of the file
     from numpy import arange
     from scipy import stats
     import numpy
+    # This code is copied from above, could be abstracted out to a single function to be used
     if cat == 'theft':
         # The forward slash requires special management since it causes the URL append to fail.
         cat = 'LARCENY/THEFT'
@@ -81,6 +86,11 @@ def cat_regression(request, cat):
     print 'standard deviation', std_err
     print 'slope ',slope
     print 'intercept ',intercept
+    # Should change this into just initializing and setting the values
+    data = {
+        'slope': slope,
+        'intercept': intercept
+    }
     data = {}
     data['slope']=slope
     data['intercept']=intercept
